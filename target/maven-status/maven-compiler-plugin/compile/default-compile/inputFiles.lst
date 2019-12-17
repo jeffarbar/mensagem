@@ -1,0 +1,14 @@
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/service/VersaoService.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/util/DataUtil.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/AppMensagem.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/enums/ResponseEnum.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/service/MensagemService.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/controller/VersaoController.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/mode/MensagemModel.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/conf/SwaggerConfig.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/vo/ResponseVo.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/controller/MensagemController.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/vo/MensagemVo.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/enums/DirectionEnum.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/repository/MensagemRepository.java
+/home/jefferson/trabalho/pessoal/rastreamento/backend/mensagem/src/main/java/br/com/mensagem/controller/Controller.java
