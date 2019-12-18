@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.logging.log4j.core.config.Scheduled;
 import org.springframework.beans.BeanUtils;
 
 import br.com.mensagem.util.DataUtil;
@@ -24,7 +25,7 @@ public class MensagemModel {
 	
 	public MensagemModel(MensagemVo mensagemVo){
 		BeanUtils.copyProperties(mensagemVo , this);
-		this.setUUID( java.util.UUID.randomUUID().toString() );
+		this.setUUID( java.util.UUID.randomUUID());
 		this.setCreatedAt( DataUtil.getDataAtual() );
 		if(mensagemVo.getContent() != null) {
 			this.setSize(mensagemVo.getContent().length());
@@ -39,13 +40,13 @@ public class MensagemModel {
 	private Long id;
 	
 	@Column(name = "UUID" )
-	private String UUID;
+	private java.util.UUID UUID;
 	
 	@Column(name = "MONITORED_POINT_ID" )
 	private String idMonitoredPont;
 	
 	@Column(name = "DIRECTION" )
-	private String direction;
+	private short direction;
 	
 	@Column(name = "CREATED_AT")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -73,11 +74,11 @@ public class MensagemModel {
 		this.id = id;
 	}
 
-	public String getUUID() {
+	public java.util.UUID getUUID() {
 		return UUID;
 	}
 
-	public void setUUID(String uUID) {
+	public void setUUID(java.util.UUID uUID) {
 		UUID = uUID;
 	}
 
@@ -89,11 +90,11 @@ public class MensagemModel {
 		this.idMonitoredPont = idMonitoredPont;
 	}
 
-	public String getDirection() {
+	public short getDirection() {
 		return direction;
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(short direction) {
 		this.direction = direction;
 	}
 

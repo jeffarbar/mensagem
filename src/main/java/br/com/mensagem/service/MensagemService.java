@@ -26,7 +26,19 @@ public class MensagemService {
 	public ResponseVo salva(MensagemVo sendVo) throws Exception{
 		
 		try {
-			mensagemRepository.saveAndFlush( new MensagemModel(sendVo) );
+			
+			int size = 0;
+			if(sendVo.getContent() != null) {
+				size = sendVo.getContent().length();
+			}
+			short direction = '0';
+			if(sendVo.getDirection() != null) {
+				direction = Short.parseShort( sendVo.getDirection() );
+			}
+			
+			mensagemRepository.salva(java.util.UUID.randomUUID(), sendVo.getIdMonitoredPont() , 
+					direction , sendVo.getContent() , size);
+			
 			return new ResponseVo( ResponseEnum.OK );
 		}catch (Exception e) {
 			logger.error("{}", e);
@@ -37,47 +49,24 @@ public class MensagemService {
 	public ResponseVo lida(Long idMensagem) throws Exception{
 		
 		try {
-			MensagemModel mensagem = mensagemRepository.findById(idMensagem)
-					.orElseThrow(() -> new NotFoundException("Não existe mensagem para "+idMensagem));
-			
-			if( mensagem.getReadAt() == null ) {
-				mensagem.setReadAt( DataUtil.getDataAtual() );
-				mensagemRepository.saveAndFlush( mensagem );
+			if( mensagemRepository.findReadAt(idMensagem) != null ) {
+				mensagemRepository.atualizaReadAt(idMensagem);
 			}
 			return new ResponseVo( ResponseEnum.OK );
-		} catch (NotFoundException e) {
-			logger.error("{}", e);
-			throw e;
 		}catch (Exception e) {
 			logger.error("{}", e);
 			throw e;
 		}
 	} 
 	
-	public List<MensagemVo> findDestino() throws Exception{
-		
-		try {
-				
-			List<Long> listIdDestino = mensagemRepository.getIdDestinos();
-			
-			return mensagemRepository.findByIdIn(listIdDestino)
-				.parallelStream().map( MensagemVo :: new).collect(Collectors.toList());
-			
-		}catch (Exception e) {
-			logger.error("{}", e);
-			throw e;
-		}
-	}
-
+	
 	public List<MensagemVo> find(String identificadorDestino) throws Exception{
 		
 		try {
 				
 			List<MensagemVo> list = mensagemRepository.findTop20ByIdMonitoredPontOrderByCreatedAtDesc(identificadorDestino)
-				.parallelStream().map( MensagemVo :: new).collect(Collectors.toList());
-			
-			this.setRecebida(list);
-			
+				.parallelStream().map( this :: convert ).collect(Collectors.toList());
+
 			return list;
 			
 		}catch (Exception e) {
@@ -86,12 +75,21 @@ public class MensagemService {
 		}
 	}
 	
-	private void setRecebida(List<MensagemVo> list) throws Exception {
+	private MensagemVo convert(Object[] object) {
 		
-		if( list != null && !list.isEmpty() ) {
-			list.stream().forEach( msg ->{
-				mensagemRepository.atualizaReiceivedAt(msg.getId());
-			});
-		}
+		MensagemVo mensagemVo = new MensagemVo();
+		
+		mensagemVo.setId( object[0] != null ? Long.valueOf(  object[0].toString() ) : null );
+		mensagemVo.setUUID( object[1] != null ? object[1].toString() : null );
+		mensagemVo.setIdMonitoredPont( object[2] != null ? object[2].toString() : null );
+		mensagemVo.setDirection( object[3] != null ? object[3].toString() : null );
+		mensagemVo.setCreatedAt(  object[4] != null ? object[4].toString() : null );
+		mensagemVo.setReiceivedAt(object[5] != null ? object[5].toString() : null );
+		mensagemVo.setReadAt(object[6] != null ? object[6].toString() : null );
+		mensagemVo.setContent( object[7] != null ? object[7].toString() : null );
+		mensagemVo.setSize( object[8] != null ? Integer.valueOf(  object[8].toString() ) : null );
+		
+		return mensagemVo;
 	}
+	
 }

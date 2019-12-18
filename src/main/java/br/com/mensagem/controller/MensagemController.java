@@ -43,14 +43,6 @@ public class MensagemController extends Controller {
 		}
     }
 	
-	@GetMapping(path="/destinos/", produces = {MediaType.APPLICATION_JSON_VALUE} )
-    public ResponseEntity<List<MensagemVo>> getAllDestino(){
-		try {
-			return ResponseEntity.ok().body(mensagemService.findDestino() ); 
-		}catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
-		}
-    }
 	
 	@GetMapping(path="/ler/{idMensagem}", produces = {MediaType.APPLICATION_JSON_VALUE} )
     public ResponseEntity<ResponseVo> getAll(@PathVariable("idMensagem") final Long idMensagem){

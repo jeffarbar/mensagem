@@ -28,6 +28,7 @@ public class DataUtil {
 		if(date == null)return null;
 		return dateFormatddMMyyyyHHmmss.format(date); 
 	}
+	
 
 	/**
 	 * emtrada yyyy-MM-dd HH:mm:ss.SSS
