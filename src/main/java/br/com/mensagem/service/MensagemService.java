@@ -37,7 +37,7 @@ public class MensagemService {
 			}
 			
 			mensagemRepository.salva(java.util.UUID.randomUUID(), sendVo.getIdMonitoredPont() , 
-					direction , sendVo.getContent() , size);
+					direction , DataUtil.getDataAtual(), sendVo.getContent() , size);
 			
 			return new ResponseVo( ResponseEnum.OK );
 		}catch (Exception e) {
@@ -64,7 +64,7 @@ public class MensagemService {
 		
 		try {
 				
-			List<MensagemVo> list = mensagemRepository.findTop20ByIdMonitoredPontOrderByCreatedAtDesc(identificadorDestino)
+			List<MensagemVo> list = mensagemRepository.findTop20ByIdMonitoredPontOrderByIdAtDesc(identificadorDestino)
 				.parallelStream().map( this :: convert ).collect(Collectors.toList());
 
 			return list;
