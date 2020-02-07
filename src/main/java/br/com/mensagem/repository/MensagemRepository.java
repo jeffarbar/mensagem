@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.com.mensagem.mode.MensagemModel;
+import br.com.mensagem.model.MensagemModel;
 
 @Repository
 public interface MensagemRepository extends JpaRepository<MensagemModel, Long> {
@@ -22,7 +22,7 @@ public interface MensagemRepository extends JpaRepository<MensagemModel, Long> {
 	void salva( java.util.UUID UUID ,  String idMonitoredPont , short direction , Date dtCreated , String content , Integer size);
 	
 	
-	@Query(value = "SELECT \"ID\", Cast( \"UUID\" as varchar) , \"MONITORED_POINT_ID\",  \"DIRECTION\", \"CREATED_AT\", \"RECEIVED_AT\", \"READ_AT\", \"CONTENT\", \"SIZE\" \n" + 
+	@Query(value = "SELECT \"ID\", Cast( \"UUID\" as varchar) , \"MONITORED_POINT_ID\",  \"DIRECTION\", \"CREATED_AT\", \"RECEIVED_AT\", \"READ_AT\", \"CONTENT\", \"SIZE\" , \"TRANSPORT\" \n" + 
 			" FROM messaging.messages where  \"MONITORED_POINT_ID\" = ?1 order by \"ID\" DESC LIMIT 20 ;" , nativeQuery = true)
 	List<Object[]> findTop20ByIdMonitoredPontOrderByIdAtDesc(String idMonitoredPont);
 	

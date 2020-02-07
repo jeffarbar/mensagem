@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.mensagem.enums.ResponseEnum;
-import br.com.mensagem.mode.MensagemModel;
+import br.com.mensagem.model.MensagemModel;
 import br.com.mensagem.repository.MensagemRepository;
 import br.com.mensagem.util.DataUtil;
 import br.com.mensagem.vo.ResponseVo;
@@ -83,11 +83,18 @@ public class MensagemService {
 		mensagemVo.setUUID( object[1] != null ? object[1].toString() : null );
 		mensagemVo.setIdMonitoredPont( object[2] != null ? object[2].toString() : null );
 		mensagemVo.setDirection( object[3] != null ? object[3].toString() : null );
-		mensagemVo.setCreatedAt(  object[4] != null ? object[4].toString() : null );
-		mensagemVo.setReiceivedAt(object[5] != null ? object[5].toString() : null );
-		mensagemVo.setReadAt(object[6] != null ? object[6].toString() : null );
+		mensagemVo.setCreatedAt(  object[4] != null ? DataUtil.converterDataGMT3( object[4].toString() ) : null );
+		mensagemVo.setReiceivedAt(object[5] != null ? DataUtil.converterDataGMT3( object[5].toString() ) : null );
+		mensagemVo.setReadAt(object[6] != null ? DataUtil.converterDataGMT3( object[6].toString() ) : null );
 		mensagemVo.setContent( object[7] != null ? object[7].toString() : null );
 		mensagemVo.setSize( object[8] != null ? Integer.valueOf(  object[8].toString() ) : null );
+		mensagemVo.setTransport( object[9] != null ? object[9].toString() : null);
+		
+		if("0".equals( mensagemVo.getTransport())) {
+			mensagemVo.setTransport("GPRS");
+		}else if("1".equals( mensagemVo.getTransport())) {
+			mensagemVo.setTransport("Satélite");
+		}
 		
 		return mensagemVo;
 	}

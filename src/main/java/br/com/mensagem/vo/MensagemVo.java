@@ -1,7 +1,8 @@
 package br.com.mensagem.vo;
 
 import org.springframework.beans.BeanUtils;
-import br.com.mensagem.mode.MensagemModel;
+
+import br.com.mensagem.model.MensagemModel;
 import br.com.mensagem.util.DataUtil;
 
 
@@ -55,8 +56,18 @@ public class MensagemVo {
 	private boolean isRecebida;
 	
 	private boolean isOnline;
-
 	
+	private String transport;
+	               
+	
+	public String getTransport() {
+		return transport;
+	}
+
+	public void setTransport(String transport) {
+		this.transport = transport;
+	}
+
 	public boolean isOnline() {
 		return isOnline;
 	}
