@@ -21,7 +21,7 @@ public class DataUtil {
 	//2020-01-07 14:29:15
 	private static SimpleDateFormat sdfBanco = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	private static SimpleDateFormat dateFormatDDMMMHHmm = new SimpleDateFormat("DD MMM HH:mm");  
+	private static SimpleDateFormat dateFormatDDMMMHHmm = new SimpleDateFormat("dd MMM HH:mm");  
 	
 	
 	public static Date getDataAtual() {
@@ -42,6 +42,7 @@ public class DataUtil {
 		}
 		
 	}
+	
 	
 	public static String converteData(Date date) {
 		if(date == null)return null;
@@ -68,6 +69,6 @@ public class DataUtil {
 	
 	public static void main(String[] args) {
 		
-		System.out.println( converterDataGMT3("2020-01-15 19:24:46.512733") );
+		System.out.println( converterDataGMT3("2020-01-11 19:24:46.512733") );
 	}
 }
